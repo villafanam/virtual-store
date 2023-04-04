@@ -2,13 +2,14 @@ import { connect } from "react-redux";
 import { Card, Stack, Typography } from "@mui/material";
 
 
-const Products = ({ products }) => {
+const Products = ({ products, activeCategory }) => {
   return (
     <>
-      <h1>Products</h1>
+      {activeCategory && <h1>{activeCategory.displayName}</h1>}
+      {activeCategory && <p>Category description goes here! </p>}
       <Stack spacing={2}  direction="row" >
         { //{ name: 'TV', category: 'electronics', price: 699.00, inStock: 5 },
-          products.map((item, idx) => (
+          activeCategory &&  products.map((item, idx) => (
             <Card key={`product-${idx}`} variant="outlined" sx={{ width: 150,  backgroundColor: "#cccccc" }}>
               <Typography gutterBottom>Name: {item.name}</Typography>
               <Typography gutterBottom>Category: {item.category}</Typography>

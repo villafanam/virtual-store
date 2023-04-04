@@ -2,6 +2,7 @@
 import Catergories from './Comonents/Categories';
 import Footer from './Comonents/Footer';
 import Header from './Comonents/Header';
+import Products from './Comonents/Products';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <>
       <Header/>
       <Catergories />
+      <Products/>
       <Footer/>
     </>
   );

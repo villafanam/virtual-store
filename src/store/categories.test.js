@@ -34,7 +34,7 @@ describe('Categories Reducer', () => {
     let newState = store.getState();
     //console.log('newState-----', newState);
 
-    expect(newState.categories.activeCategory).toEqual('food')
+    expect(newState.categories.activeCategory.name).toEqual('food')
   });
 
   test('filter products by category', () => {
@@ -47,7 +47,7 @@ describe('Categories Reducer', () => {
     let newState = store.getState();
     //console.log('newState-----', newState);
 
-    expect(newState.categories.activeCategory).toEqual('food');
+    expect(newState.categories.activeCategory.name).toEqual('food');
     expect(newState.categories.products[0].name).toEqual('Apples');
     expect(newState.categories.products[0].category).toEqual('food');
   });

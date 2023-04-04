@@ -9,9 +9,10 @@ import { When } from "react-if";
 const Catergories = ({ categories, products, activeCategory, setCategory, filterProduct, reset }) => {
   return (
     <>
-      <h3>Categories</h3>
+      <h2>Browse our Categories</h2>
+      {/* <h2>{activeCategory.toUpperCase()}</h2> */}
 
-      <ButtonGroup variant="text" aria-label="text button group">
+      <ButtonGroup variant="text" aria-label="category button group">
         {
           categories.map((category, idx) => (
             <Button
@@ -28,10 +29,10 @@ const Catergories = ({ categories, products, activeCategory, setCategory, filter
         }
         <Button color="error" onClick={() => reset()}>RESET</Button>
       </ButtonGroup>
-      
-      <When condition={activeCategory !== ''}>
+
+      {/* <When condition={activeCategory !== ''}>
         <Products />
-      </When>
+      </When> */}
     </>
   );
 };

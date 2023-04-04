@@ -21,13 +21,13 @@ const categoriesReducer = (state = initialState, action) => {
     case 'SET_CATEGORY':
       return {
         ...state,
-        activeCategory: action.payload.name,
-        products: initialState.products,
+        activeCategory: action.payload,
+        // products: initialState.products,
       };
       case 'FILTER_PRODUCTS':
         return {
           ...state,
-        products: state.products.filter((item) => item.category === state.activeCategory),
+        products: initialState.products.filter((item) => item.category === state.activeCategory.name),
         };
     case 'RESET':
       return initialState;
