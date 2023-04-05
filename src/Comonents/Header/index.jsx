@@ -1,10 +1,15 @@
-
+import { Button } from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Header = () => {
   return (
-    <header>
+    <nav>
       <h1>OUR STORE</h1>
-    </header>
+      
+      <Button variant="outlined" startIcon={<ShoppingCartIcon />}>
+        Cart(0)
+      </Button>
+    </nav>
   );
 };
 

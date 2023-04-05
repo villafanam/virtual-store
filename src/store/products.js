@@ -8,23 +8,18 @@ const initialState = [
   { name: 'Bread', category: 'food', price: 2.39, inStock: 90 },
 ];
 
-// const productReducer = (state = initialState, action) => {
-//   switch(action.type){
-//     case 'FILTER_PRODUCTS':
-//         return initialState.filter((item) => item.category === action.payload.name);
-//     default:
-//       return state;
-//   }
-// };
-
-const productReducer = (state = { products: initialState, filteredProducts: initialState }, action) => {
-  switch(action.type){
-    case 'FILTER_PRODUCTS':
-      const filteredProducts = initialState.filter((item) => item.category === action.payload.name);
-      return { ...state, filteredProducts };
+const productReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'SET':
+      return initialState.filter((item) => item.category === action.payload.name);
+    case 'DECREASE_INSTOCK':
+      return state.map((item) => item.name === action.payload.name ? { ...item, inStock: action.payload.inStock } : item);
+    case 'INCREASE_INSTOCK':
+      return state.map((item) => item.name === action.payload.name ? { ...item, inStock: action.payload.inStock } : item);
     default:
       return state;
   }
 };
+
 
 export default productReducer;

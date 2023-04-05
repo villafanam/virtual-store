@@ -19,7 +19,6 @@ const Catergories = () => {
               key={`category-${idx}`}
               onClick={() => {
                 dispatch(setCategory(category));
-                dispatch(filterProduct());
               }}
             >
               {category.displayName}

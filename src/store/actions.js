@@ -1,15 +1,8 @@
 //actions
 export const setCategory = (category) => {
   return {
-    type: 'SET_CATEGORY',
+    type: 'SET',
     payload: category,
-  };
-}
-
-export const filterProduct = () => {
-  return {
-    type: 'FILTER_PRODUCTS',
-    payload: {},
   };
 }
 
