@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory, filterProduct, reset } from "../../store/actions";
+import { setCategory, reset } from "../../store/actions";
 import { Button, ButtonGroup } from "@mui/material";
 
 
 
 const Catergories = () => {
-  const { categories  } = useSelector((state) => state); 
+  const { categories  } = useSelector((state) => state.categories); 
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +14,7 @@ const Catergories = () => {
 
       <ButtonGroup variant="text" aria-label="category button group">
         {
-          categories.categories.map((category, idx) => (
+          categories.map((category, idx) => (
             <Button
               key={`category-${idx}`}
               onClick={() => {
