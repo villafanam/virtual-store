@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Card, CardActions, CardContent, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { addProduct } from "../../store/actions";
 
@@ -14,32 +14,44 @@ const Products = () => {
       {activeCategory && <h1>{activeCategory.displayName}</h1>}
       {activeCategory && <p>Category description goes here! </p>}
 
-      <Stack spacing={2} direction="row" >
+      <Grid container spacing={4}>
         {
           activeCategory && products.map((item, idx) => (
-            <Card key={`product-${idx}`} variant="outlined" sx={{ width: 150, backgroundColor: "#cccccc" }}>
-              <CardContent>
-                <Typography gutterBottom>Name: {item.name}</Typography>
-                <Typography gutterBottom>Category: {item.category}</Typography>
-                <Typography gutterBottom>Price: ${item.price}</Typography>
-                <Typography gutterBottom>inStock: {item.inStock}</Typography>
-              </CardContent>
+            <Grid item key={`product-${idx}`} xs={12} sm={6} md={4}>
+              <Card sx={{ width: '100%', height: '90%' }}>
+                <CardMedia
+                  component="img"
+                  image={`https://source.unsplash.com/random?${item.name}`}
+                  title={item.name}
+                  sx={{height: '50%'}}
+                >
+                </CardMedia>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">{item.name}</Typography>
+                  <Typography gutterBottom>Category: {item.category}</Typography>
+                  <Typography gutterBottom>Price: ${item.price}</Typography>
+                  <Typography gutterBottom>inStock: {item.inStock}</Typography>
+                </CardContent>
 
-              <CardActions >
-                <Tooltip title="add to shopping cart">
-                  <IconButton 
-                  color="primary" 
-                  aria-label="add to shopping cart" 
-                  onClick={() => dispatch(addProduct(item))}
-                  >
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                </Tooltip>
-              </CardActions>
-            </Card>
+                <CardActions >
+                  <Tooltip title="add to shopping cart">
+                    <IconButton
+                      color="primary"
+                      aria-label="add to shopping cart"
+                      onClick={() => dispatch(addProduct(item))}
+                    >
+                      <AddShoppingCartIcon />
+                    </IconButton>
+                  </Tooltip>
+                </CardActions>
+              </Card>
+
+            </Grid>
           ))
         }
-      </Stack>
+
+      </Grid>
+
 
     </>
   );
