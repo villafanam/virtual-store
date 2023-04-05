@@ -8,14 +8,17 @@ const initialState = [
   { name: 'Bread', category: 'food', price: 2.39, inStock: 90 },
 ];
 
+let temp = [...initialState];
+
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET':
       return initialState.filter((item) => item.category === action.payload.name);
-    case 'DECREASE_INSTOCK':
-      return state.map((item) => item.name === action.payload.name ? { ...item, inStock: action.payload.inStock } : item);
-    case 'INCREASE_INSTOCK':
-      return state.map((item) => item.name === action.payload.name ? { ...item, inStock: action.payload.inStock } : item);
+    case 'ADD_PRODUCT':
+      temp = temp.map((item) => item.name === action.payload.name ? {...item, inStock: item.inStock - 1} : item);
+      let result = temp.filter((item) => item.category === action.payload.category);
+      console.log('result:----', result)
+      return result;
     default:
       return state;
   }
