@@ -20,7 +20,7 @@
 
 ### Collaborators
 
-+ Joseph Davitt
+
 
 ### Setup
 
