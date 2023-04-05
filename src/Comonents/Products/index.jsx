@@ -1,15 +1,21 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, Stack, Typography } from "@mui/material";
 
 
-const Products = ({ products, activeCategory }) => {
+const Products = () => {
+  const { products, categories } = useSelector((state) => state); 
+  const { filterProducts} = useSelector((state) => state.products); 
+  const dispatch = useDispatch();
+  let { activeCategory } = categories;
+  console.log('products: ----', products);
   return (
     <>
       {activeCategory && <h1>{activeCategory.displayName}</h1>}
       {activeCategory && <p>Category description goes here! </p>}
+      
       <Stack spacing={2}  direction="row" >
-        { //{ name: 'TV', category: 'electronics', price: 699.00, inStock: 5 },
-          activeCategory &&  products.map((item, idx) => (
+       {
+          activeCategory &&  filterProducts.map((item, idx) => (
             <Card key={`product-${idx}`} variant="outlined" sx={{ width: 150,  backgroundColor: "#cccccc" }}>
               <Typography gutterBottom>Name: {item.name}</Typography>
               <Typography gutterBottom>Category: {item.category}</Typography>
@@ -24,13 +30,7 @@ const Products = ({ products, activeCategory }) => {
   );
 };
 
-const mapStateToProps = ({ categories }) => {
-  return {
-    products: categories.products,
-    activeCategory: categories.activeCategory,
-  };
-};
 
 
 
-export default connect(mapStateToProps)(Products);
+export default Products;
