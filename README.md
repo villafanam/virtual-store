@@ -1,6 +1,6 @@
-# LAB - Class 36
+# LAB - Class 37
 
-## Project: Application State with Redux
+## Project: Redux - Combined Reducers
 
 ### Author: Marco Villafana
 
