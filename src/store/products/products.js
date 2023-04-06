@@ -1,27 +1,58 @@
-const initialState = [
-  { name: 'TV', category: 'electronics', price: 699.00, inStock: 5 },
-  { name: 'Radio', category: 'electronics', price: 99.00, inStock: 15 },
-  { name: 'Shirt', category: 'clothing', price: 9.00, inStock: 25 },
-  { name: 'Socks', category: 'clothing', price: 12.00, inStock: 10 },
-  { name: 'Apples', category: 'food', price: .99, inStock: 500 },
-  { name: 'Eggs', category: 'food', price: 1.99, inStock: 12 },
-  { name: 'Bread', category: 'food', price: 2.39, inStock: 90 },
-];
+import axios from "axios";
+import { setProducts } from "../actions";
 
-let temp = [...initialState];
+
+
+// https://api-js401.herokuapp.com/api/v1/products
+
+// example object:
+//     {
+//       "_id": "620333730913520018fa1d2a",
+//       "name": "Stickies",
+//       "category": "office",
+//       "inStock": 43,
+//       "price": 1000,
+//       "__v": 0
+//     },
+
+const initialState = [];
+let temp = [];
 
 const productReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case 'SET':
-      return initialState.filter((item) => item.category === action.payload.name);
+      return temp.filter((item) => item.category === payload.name);
     case 'ADD_PRODUCT':
-      temp = temp.map((item) => item.name === action.payload.name ? {...item, inStock: item.inStock - 1} : item);
-      let result = temp.filter((item) => item.category === action.payload.category);
-      console.log('result:----', result)
+      temp = temp.map((item) => item.name === payload.name ? { ...item, inStock: item.inStock - 1 } : item);
+      let result = temp.filter((item) => item.category === payload.category);
+      //console.log('result:----', result);
       return result;
+    case 'GET-PRODUCTS':
+      temp = [...payload];
+      return payload
+    case 'UPDATE-STOCK':
+      return {};
     default:
       return state;
   }
+};
+
+export const getProducts = () => async (dispatch, getState) => {
+  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/products')
+  dispatch(setProducts(response.data.results));
+};
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+  let config = {
+    url: `/${product._id}`,
+    method: 'put',
+    baseURL: 'https://api-js401.herokuapp.com/api/v1/products',
+    data: product,
+  };
+  let response = await axios(config);
+  dispatch(getProducts());
 };
 
 
