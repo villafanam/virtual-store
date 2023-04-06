@@ -1,4 +1,6 @@
-//actions
+import axios from "axios";
+
+
 export const set = (category) => {
   return {
     type: 'SET',
@@ -43,3 +45,32 @@ export const removeProduct = (product) => {
   };
 }
 
+export const updateProduct = (product) => {
+  return {
+    type: 'UPDATE-PRODUCT',
+    payload: product,
+  };
+}
+
+
+export const getCategories = () => async (dispatch, getState) => {
+  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/categories')
+  dispatch(setCategory(response.data.results));
+};
+
+export const getProducts = () => async (dispatch, getState) => {
+  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/products')
+  dispatch(setProducts(response.data.results));
+};
+
+export const updateInventory = (product) => async (dispatch, getState) => {
+  product.inStock--;
+  let config = {
+    url: `/${product._id}`,
+    method: 'put',
+    baseURL: 'https://api-js401.herokuapp.com/api/v1/products',
+    data: product,
+  };
+  let response = await axios(config);
+  dispatch(updateProduct(response.data));
+};

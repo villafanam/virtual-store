@@ -1,6 +1,3 @@
-import axios from "axios";
-import { setProducts } from "../actions";
-
 
 
 // https://api-js401.herokuapp.com/api/v1/products
@@ -24,35 +21,19 @@ const productReducer = (state = initialState, action) => {
   switch (type) {
     case 'SET':
       return temp.filter((item) => item.category === payload.name);
-    case 'ADD_PRODUCT':
-      temp = temp.map((item) => item.name === payload.name ? { ...item, inStock: item.inStock - 1 } : item);
-      let result = temp.filter((item) => item.category === payload.category);
-      //console.log('result:----', result);
-      return result;
+    // case 'ADD_PRODUCT':
+    //   temp = temp.map((item) => item.name === payload.name ? { ...item, inStock: item.inStock - 1 } : item);
+    //   let result = temp.filter((item) => item.category === payload.category);
+    //   //console.log('result:----', result);
+    //   return result;
     case 'GET-PRODUCTS':
       temp = [...payload];
       return payload
-    case 'UPDATE-STOCK':
-      return {};
+    case 'UPDATE-PRODUCT':
+      return state.map(product => product.name === payload.name ? payload : product);
     default:
       return state;
   }
-};
-
-export const getProducts = () => async (dispatch, getState) => {
-  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/products')
-  dispatch(setProducts(response.data.results));
-};
-
-export const updateProduct = (product) => async (dispatch, getState) => {
-  let config = {
-    url: `/${product._id}`,
-    method: 'put',
-    baseURL: 'https://api-js401.herokuapp.com/api/v1/products',
-    data: product,
-  };
-  let response = await axios(config);
-  dispatch(getProducts());
 };
 
 

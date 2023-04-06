@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { addProduct } from "../../store/actions";
+import { addProduct, getProducts, updateInventory } from "../../store/actions";
 import { useEffect } from "react";
-import { getProducts } from "../../store/products/products";
+
 
 
 const Products = () => {
@@ -15,11 +15,16 @@ const Products = () => {
     dispatch(getProducts());
   }, []);
 
-  console.log(products);
+const addItemHandler = (product) => {
+  dispatch(addProduct(product));
+  dispatch(updateInventory(product));
+};
+
+  //console.log(products);
   return (
     <>
-      {activeCategory && <h1>{activeCategory.displayName}</h1>}
-      {activeCategory && <p>Category description goes here! </p>}
+      {activeCategory && <h1>{activeCategory.name}</h1>}
+      {activeCategory && <p>{activeCategory.description}</p>}
 
       <Grid container spacing={4}>
         {
@@ -45,7 +50,7 @@ const Products = () => {
                     <IconButton
                       color="primary"
                       aria-label="add to shopping cart"
-                      onClick={() => dispatch(addProduct(item))}
+                      onClick={() => addItemHandler(item)}
                     >
                       <AddShoppingCartIcon />
                     </IconButton>

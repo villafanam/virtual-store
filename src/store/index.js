@@ -3,7 +3,8 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import categoriesReducer from './categories/categories';
 import productReducer from './products/products';
 import cartReducer from './cart/cart';
-import thunk from './middleware/thunk';
+// import thunk from './middleware/thunk';
+import thunk from 'redux-thunk';
 
 let reducers = combineReducers({
   categories: categoriesReducer,
