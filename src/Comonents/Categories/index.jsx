@@ -1,12 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory, reset } from "../../store/actions";
+import { set, reset } from "../../store/actions";
 import { Button, ButtonGroup } from "@mui/material";
+import { useEffect } from "react";
+import { getCategories } from "../../store/categories/categories";
 
 
 
 const Catergories = () => {
   const { categories  } = useSelector((state) => state.categories); 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, []);
 
   return (
     <>
@@ -18,15 +24,15 @@ const Catergories = () => {
             <Button
               key={`category-${idx}`}
               onClick={() => {
-                dispatch(setCategory(category));
+                dispatch(set(category));
               }}
             >
-              {category.displayName}
+              {category.name}
             </Button>
 
           ))
         }
-        <Button color="error" onClick={() => dispatch(reset())}>RESET</Button>
+        {/* <Button color="error" onClick={() => dispatch(reset())}>RESET</Button> */}
       </ButtonGroup>
 
     </>
