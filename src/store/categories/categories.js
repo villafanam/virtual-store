@@ -34,10 +34,7 @@ const categoriesReducer = (state = initialState, action) => {
   }
 }
 
-export const getCategories = () => async (dispatch, getState) => {
-  let response = await axios.get('https://api-js401.herokuapp.com/api/v1/categories')
-  dispatch(setCategory(response.data.results));
-};
+
 
 
 export default categoriesReducer;
