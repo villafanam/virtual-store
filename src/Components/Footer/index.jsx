@@ -4,9 +4,6 @@ const Footer = () => {
   return (
     <footer data-testid="footer"
       style={{
-        margin: 'auto',
-        position: 'absolute',
-        bottom: 0,
         textAlign: 'right'
       }}
     >

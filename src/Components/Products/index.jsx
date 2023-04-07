@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { addProduct, getProducts, updateInventory } from "../../store/actions";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -55,6 +56,7 @@ const addItemHandler = (product) => {
                       <AddShoppingCartIcon />
                     </IconButton>
                   </Tooltip>
+                  <Button component={Link} to={`/productdetails/${item._id}`} >view details</Button>
                 </CardActions>
               </Card>
 

@@ -30,7 +30,8 @@ const productReducer = (state = initialState, action) => {
       temp = [...payload];
       return payload
     case 'UPDATE-PRODUCT':
-      return state.map(product => product.name === payload.name ? payload : product);
+      temp = temp.map(product => product.name === payload.name ? payload : product)
+      return temp.filter((item) => item.category === payload.category);
     default:
       return state;
   }

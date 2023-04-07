@@ -64,7 +64,9 @@ export const getProducts = () => async (dispatch, getState) => {
 };
 
 export const updateInventory = (product) => async (dispatch, getState) => {
+  console.log('BEFORE inStock: ---', product.inStock);
   product.inStock--;
+  console.log('AFTER inStock: ---', product.inStock);
   let config = {
     url: `/${product._id}`,
     method: 'put',
@@ -72,5 +74,6 @@ export const updateInventory = (product) => async (dispatch, getState) => {
     data: product,
   };
   let response = await axios(config);
+  console.log('resopnse:----', response.data);
   dispatch(updateProduct(response.data));
 };

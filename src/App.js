@@ -1,19 +1,28 @@
 
-import Catergories from './Comonents/Categories';
-import Footer from './Comonents/Footer';
-import Header from './Comonents/Header';
-import Products from './Comonents/Products';
-import SimpleCart from './Comonents/SimpleCart';
+
+import Footer from './Components/Footer';
+import Header from './Components/Header';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProductDetails  from './Components/ProductDetails'
+import Storefront from './Components/Storefront';
+import ShoppingCart from './Components/ShoppingCart'
 
 
 function App() {
   return (
     <>
-      <Header/>
-      <SimpleCart/>
-      <Catergories/>
-      <Products/>
-      <Footer/>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Storefront />} />
+          <Route path='/productdetails/:id' element={<ProductDetails />} />
+          <Route path='/shoppingcart' element={<ShoppingCart />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+      {/* <Header />
+      <Storefront />
+      <Footer /> */}
     </>
   );
 }
