@@ -11,7 +11,12 @@ const SimpleCart = () => {
 
   return (
     <>
-      <List>
+      <List style={{
+        position: 'fixed',
+        top: '4.5rem',
+        right: '1rem',
+        width: '200px'
+      }}>
         {
           cart.products.map((item, idx) => (
             <ListItem secondaryAction={
@@ -23,7 +28,7 @@ const SimpleCart = () => {
             </ListItem>
           ))
         }
-      </List>
+      </List >
     </>
   );
 };
