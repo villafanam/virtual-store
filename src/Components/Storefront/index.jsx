@@ -5,7 +5,7 @@ import SimpleCart from "../SimpleCart";
 const Storefront = () => {
   return (
     <>
-      <SimpleCart/>
+      {/* <SimpleCart/> */}
       <Catergories/>
       <Products/>
     </>

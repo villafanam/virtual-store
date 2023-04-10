@@ -2,7 +2,7 @@ import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { red } from '@mui/material/colors';
-import { removeProduct } from "../../store/actions";
+import { removeProduct } from "../../store/cart/cart";
 
 
 const SimpleCart = () => {
@@ -19,7 +19,7 @@ const SimpleCart = () => {
       }}>
         {
           cart.products.map((item, idx) => (
-            <ListItem secondaryAction={
+            <ListItem key={`cartItem-${idx}`} secondaryAction={
               <IconButton edge='end' aria-label="delete" onClick={() => dispatch(removeProduct(item))}>
                 <CancelIcon sx={{ color: red[900] }} />
               </IconButton>}

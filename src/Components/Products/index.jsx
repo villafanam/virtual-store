@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { addProduct, getProducts, updateInventory } from "../../store/actions";
+// import { updateInventory } from "../../store/actions";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getProductsDB, updateInventory } from "../../store/products/products";
+import { addProduct } from "../../store/cart/cart";
 
 
 
@@ -12,14 +14,17 @@ const Products = () => {
   const { activeCategory } = categories;
   const dispatch = useDispatch();
 
+
+  //console.log(addProductToCart);
+
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProductsDB());
   }, []);
 
-const addItemHandler = (product) => {
-  dispatch(addProduct(product));
-  dispatch(updateInventory(product));
-};
+  const addItemHandler = (product) => {
+    dispatch(addProduct(product));
+    dispatch(updateInventory(product));
+  };
 
   //console.log(products);
   return (
@@ -36,7 +41,7 @@ const addItemHandler = (product) => {
                   component="img"
                   image={`https://source.unsplash.com/random?${item.name}`}
                   title={item.name}
-                  sx={{height: '50%'}}
+                  sx={{ height: '50%' }}
                 >
                 </CardMedia>
                 <CardContent>
