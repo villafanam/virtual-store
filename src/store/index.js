@@ -5,16 +5,25 @@ import productReducer from './products/products';
 import cartReducer from './cart/cart';
 // import thunk from './middleware/thunk';
 import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
-let reducers = combineReducers({
-  categories: categoriesReducer,
-  products: productReducer,
-  cart: cartReducer,
+// let reducers = combineReducers({
+//   categories: categoriesReducer,
+//   products: productReducer,
+//   cart: cartReducer,
+// });
+
+// const store = () => {
+//   return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
+// }
+
+const store = () => configureStore({
+  reducer: {
+    categories: categoriesReducer,
+    products: productReducer,
+    cart: cartReducer,
+  }
 });
-
-const store = () => {
-  return createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
-}
 
 
 export default store();

@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { set, getCategories, reset } from "../../store/actions";
+// import { set } from "../../store/actions";
 import { Button, ButtonGroup } from "@mui/material";
 import { useEffect } from "react";
+import { getCategoriesDB, set } from "../../store/categories/categories";
+import { set as setPro } from "../../store/products/products";
+
 
 
 
@@ -11,7 +14,7 @@ const Catergories = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(getCategoriesDB())
   }, []);
 
   return (
@@ -25,6 +28,7 @@ const Catergories = () => {
               key={`category-${idx}`}
               onClick={() => {
                 dispatch(set(category));
+                dispatch(setPro(category));
               }}
             >
               {category.name}
